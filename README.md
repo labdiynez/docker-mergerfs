@@ -12,7 +12,7 @@
 Just the basics to get the container running:
 
 ```shell
-docker run --rm --name mergerfs -v /<host_folder_config>:/config -v /<host_folder_mountpoint>:/mountpoint:shared -e BRANCHES="/path1:/path2" hotio/mergerfs
+docker run --rm --name mergerfs -v /<host_folder_config>:/config -v /<host_folder_source1>:/source1 -v /<host_folder_source2>:/source2 -v /<host_folder_mountpoint>:/mountpoint:shared hotio/mergerfs
 ```
 
 The environment variables below are all optional, the values you see are the defaults.
@@ -23,6 +23,7 @@ The environment variables below are all optional, the values you see are the def
 -e UMASK=002
 -e TZ="Etc/UTC"
 -e ARGS=""
+-e BRANCHES="/source1:/source2"
 -e MOUNTPOINT="/mountpoint"
 ```
 
