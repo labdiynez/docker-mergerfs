@@ -2,7 +2,7 @@ FROM hotio/base@sha256:039214e09dba0974ad79ac56e166b943503c09179a4743865928392ad
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ENV BRANCHES="" MOUNTPOINT="/mountpoint"
+ENV BRANCHES="/source1:/source2" MOUNTPOINT="/mountpoint"
 
 # install packages
 RUN apt update && \
