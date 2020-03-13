@@ -23,7 +23,6 @@ The environment variables below are all optional, the values you see are the def
 -e UMASK=002
 -e TZ="Etc/UTC"
 -e ARGS=""
--e OPTIONS=""
 -e MOUNTPOINT="/mountpoint"
 ```
 
