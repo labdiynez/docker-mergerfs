@@ -2,4 +2,4 @@
 # shellcheck shell=bash
 
 # shellcheck disable=SC2086
-exec mergerfs "${BRANCHES}" "${MOUNTPOINT}" -f -o allow_other -o auto_unmount -o uid="${PUID}" -o gid="${PGID}" -o umask="${UMASK}" ${ARGS}
+exec mergerfs "${BRANCHES}" "${MOUNTPOINT}" -f -o allow_other -o auto_unmount ${ARGS}
