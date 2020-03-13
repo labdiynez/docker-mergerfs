@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# shellcheck disable=SC2086
+exec mergerfs -o "allow_other${OPTIONS}" "${BRANCHES}" "${MOUNTPOINT}" ${ARGS}
