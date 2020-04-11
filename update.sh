@@ -12,7 +12,6 @@ if [[ ${1} == "checkdigests" ]]; then
 else
     version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/trapexit/mergerfs/releases/latest" | jq -r .tag_name | sed s/v//g)
     [[ -z ${version} ]] && exit 1
-    find . -type f -name '*.Dockerfile' -exec sed -i "s/ARG MERGERFS_VERSION=.*$/ARG MERGERFS_VERSION=${version}/g" {} \;
-    sed -i "s/{TAG_VERSION=.*}$/{TAG_VERSION=${version}}/g" .drone.yml
+    sed -i "s/{MERGERFS_VERSION=[^}]*}/{MERGERFS_VERSION=${version}}/g" .drone.yml
     echo "##[set-output name=version;]${version}"
 fi
