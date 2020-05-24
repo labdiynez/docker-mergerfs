@@ -1,13 +1,14 @@
-FROM hotio/base@sha256:4135836fc39a944a6586dac95601889e7e69af506908945fb49884c6462fddb8
+FROM ubuntu@sha256:2b90cad5ded7946db07a28252618b9c8b7f4f103fc39266bcc795719d1362d40
+LABEL maintainer="hotio"
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ENV BRANCHES="/source1:/source2" MOUNTPOINT="/mountpoint"
+ENTRYPOINT ["mergerfs"]
 
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        fuse && \
+        ca-certificates curl fuse && \
 # clean up
     apt autoremove -y && \
     apt clean && \
@@ -17,5 +18,3 @@ ARG MERGERFS_VERSION
 
 # install mergerfs
 RUN debfile="/tmp/mergerfs.deb" && curl -fsSL -o "${debfile}" "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs_${MERGERFS_VERSION}.ubuntu-bionic_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
-
-COPY root/ /
