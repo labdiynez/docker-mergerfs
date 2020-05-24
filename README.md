@@ -15,6 +15,8 @@ Just the basics to get the container running:
 docker run --rm hotio/mergerfs ...
 ```
 
+The default `ENTRYPOINT` is `mergerfs -f`.
+
 ## Tags
 
 | Tag      | Description                    | Build Status                                                                                                                                              | Last Updated                                                                                                                                                      |
