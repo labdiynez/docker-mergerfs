@@ -18,7 +18,7 @@ LABEL maintainer="hotio"
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ENTRYPOINT ["mergerfs"]
+ENTRYPOINT ["mergerfs", "-f"]
 
 # install packages
 RUN apt update && \
