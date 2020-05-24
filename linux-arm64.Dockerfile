@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        ca-certificates curl libfuse2
+        ca-certificates curl fuse
 
 ARG MERGERFS_VERSION
 
@@ -23,7 +23,7 @@ ENTRYPOINT ["mergerfs"]
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        libfuse2 && \
+        fuse && \
 # clean up
     apt autoremove -y && \
     apt clean && \
