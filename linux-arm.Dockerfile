@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        ca-certificates curl
+        ca-certificates curl libfuse2
 
 ARG MERGERFS_VERSION
 
