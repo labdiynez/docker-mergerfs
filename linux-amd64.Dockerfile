@@ -1,7 +1,7 @@
 FROM alpine:3.11 as builder
 
 # install packages
-RUN apk add --no-cache fuse libattr libgcc libstdc++ autoconf automake libtool gettext-dev attr-dev linux-headers curl
+RUN apk add --no-cache fuse libattr libgcc libstdc++ autoconf automake libtool gettext-dev attr-dev linux-headers curl make
 
 ARG MERGERFS_VERSION
 
