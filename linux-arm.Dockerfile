@@ -7,7 +7,7 @@ ARG MERGERFS_VERSION
 
 # install mergerfs
 RUN mkdir /mergerfs && \
-    curl -fsSL "https://github.com/trapexit/mergerfs/archive/v${MERGERFS_VERSION}.tar.gz" | tar xzf - -C "/mergerfs" --strip-components=1 && \
+    curl -fsSL "https://github.com/trapexit/mergerfs/archive/${MERGERFS_VERSION}.tar.gz" | tar xzf - -C "/mergerfs" --strip-components=1 && \
     cd /mergerfs && \
     make && make install
 
