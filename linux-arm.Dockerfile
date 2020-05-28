@@ -20,6 +20,6 @@ ENTRYPOINT ["mergerfs", "-f"]
 # install packages
 RUN apk add --no-cache fuse libattr libgcc libstdc++
 
-COPY --from=builder /usr/bin/mergerfs /usr/bin/mergerfs
-COPY --from=builder /usr/bin/mergerfs-fusermount /usr/bin/mergerfs-fusermount
-COPY --from=builder /usr/sbin/mount.mergerfs /usr/sbin/mount.mergerfs
+COPY --from=builder /usr/local/bin/mergerfs /usr/local/bin/mergerfs
+COPY --from=builder /usr/local/bin/mergerfs-fusermount /usr/local/bin/mergerfs-fusermount
+COPY --from=builder /usr/local/sbin/mount.mergerfs /usr/local/sbin/mount.mergerfs
