@@ -1,33 +1,24 @@
-FROM ubuntu:18.04 as builder
-
-ARG DEBIAN_FRONTEND="noninteractive"
+FROM alpine:3.11 as builder
 
 # install packages
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        ca-certificates curl fuse
+RUN apk add --no-cache fuse libattr libgcc libstdc++ autoconf automake libtool gettext-dev attr-dev linux-headers
 
 ARG MERGERFS_VERSION
 
 # install mergerfs
-RUN debfile="/tmp/mergerfs.deb" && curl -fsSL -o "${debfile}" "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs_${MERGERFS_VERSION}.ubuntu-bionic_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
+RUN mkdir /mergerfs && \
+    curl -fsSL "https://github.com/trapexit/mergerfs/archive/v${MERGERFS_VERSION}.tar.gz" | tar xzf - -C "/mergerfs" --strip-components=1 && \
+    cd /mergerfs && \
+    make && make install
 
 
-FROM ubuntu@sha256:03e4a3b262fd97281d7290c366cae028e194ae90931bc907991444d026d6392a
+FROM alpine@sha256:ad295e950e71627e9d0d14cdc533f4031d42edae31ab57a841c5b9588eacc280
 LABEL maintainer="hotio"
-
-ARG DEBIAN_FRONTEND="noninteractive"
 
 ENTRYPOINT ["mergerfs", "-f"]
 
 # install packages
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        fuse && \
-# clean up
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+RUN apk add --no-cache fuse libattr libgcc libstdc++
 
 COPY --from=builder /usr/bin/mergerfs /usr/bin/mergerfs
 COPY --from=builder /usr/bin/mergerfs-fusermount /usr/bin/mergerfs-fusermount
